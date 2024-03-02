@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container-1">
+
+        <div class="centrar">
+
+            <button id="btn1" class="btn"> Fibonacci </button>
+            <button id="btn2" class="btn">Subsequence</button>
+
+        </div>
+
+
+        <div id="div1" style="display: none;">
+            <h1>Calculadora de Fibonacci</h1>
+            <form id="fibonacciForm">
+
+                <div class="contenid-1">
+
+                    <label for="number">Ingrese un número para calcular: </label>
+                    <input type="number" id="number" name="number" min="1" required>
+
+                </div>
+
+                <button type="submit" class="submit">
+                    <span>Calcular Fibonacci</span>
+                </button>
+
+            </form>
+
+            <div id="result"></div>
+            <script>
+                document.getElementById('fibonacciForm').addEventListener('submit', function (event) {
+                    event.preventDefault();
+                    const number = document.getElementById('number').value;
+                    if (number > 0) {
+                        fetch(`http://127.0.0.1:5000/fibonacci/${number}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                document.getElementById('result').innerText = `El ${number}-ésimo término de Fibonacci es: ${data.result}`;
+                            });
+                    }
+                });
+            </script>
+
+
+
+
+
+        </div>
+
+        <div id="div2" style="display: none;">
+
+
+            <h1>Calculadora de Subsecuencia</h1>
+            <form id="lcsForm">
+                <div class="contenid-1">
+                    <label for="cadena1">Ingrese la primera cadena:</label>
+                    <input type="text" id="cadena1" name="cadena1" required>
+                </div>
+                <div class="contenid-2">
+                    <label for="cadena2">Ingrese la segunda cadena:</label>
+                    <input type="text" id="cadena2" name="cadena2" required>
+                </div>
+                <button type="submit" class="submit">
+                    <span>Calcular LCS</span>
+                </button>
+            </form>
+            <div id="result-2"></div>
+
+            <script>
+                document.getElementById('lcsForm').addEventListener('submit', function (event) {
+                    event.preventDefault();
+                    const string_1 = document.getElementById('cadena1').value;
+                    const string_2 = document.getElementById('cadena2').value;
+
+                    if (string_1.length > 0 && string_2.length > 0) {
+                        const data = {
+                            s1: string_1,
+                            s2: string_2,
+                        };
+
+                        fetch('http://127.0.0.1:5000/lcs/' + string_1 + '/' + string_2)
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data);
+                                document.getElementById('result-2').innerText = 'La longitud de la subsecuencia común más larga es: ' + data.result;  // Acceder al resultado dentro del objeto JSON
+                            })
+
+                    }
+                });
+            </script>
+        </div>
+
+    </div>
+
+    <div class="container-2">
+
+        <div class="glowing">
+
+            <span style="--i:1;"></span>
+
+            <span style="--i:2;"></span>
+
+            <span style="--i:3;"></span>
+
+        </div>
+
+        <div class="glowing">
+
+            <span style="--i:1;"></span>
+
+            <span style="--i:2;"></span>
+
+            <span style="--i:3;"></span>
+
+        </div>
+
+        <div class="glowing">
+
+            <span style="--i:1;"></span>
+
+            <span style="--i:2;"></span>
+
+            <span style="--i:3;"></span>
+
+        </div>
+
+        <div class="glowing">
+
+            <span style="--i:1;"></span>
+
+            <span style="--i:2;"></span>
+
+            <span style="--i:3;"></span>
+
+        </div>
+
+    </div>
+
+
+
+    <script src="../js/script.js"></script>
+
+</body>
+
+</html>
